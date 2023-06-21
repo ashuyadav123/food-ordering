@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFC|Online order</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body{
+            background-color: maroon;
+        }
+    </style>
+    <script>
+      function OrderClick(){
+        document.getElementById("lblName").innerHTML=document.getElementById("txtName").value;
+        document.getElementById("lblMobile").innerHTML=document.getElementById("txtMobile").value;
+
+        var mealName="";
+        var mealCost=0;
+        var adonName="";
+        var adonCost=0;
+        
+        var optBurger=document.getElementById("optBurger");
+        var optRoller=document.getElementById("optRoller");
+        if(optBurger.checked){
+            mealCost=120;
+            mealName=optBurger.value;
+        }
+        if(optRoller.checked){
+            mealCost=100;
+            mealName=optRoller.value;
+        }
+
+        var optWings=document.getElementById("optWings");
+        var optKrusher=document.getElementById("optKrusher");
+
+        if(optWings.checked){
+            adonCost=70;
+            mealCost += adonCost;
+            adonName += optWings.value + "<br>";
+        }
+       if(optKrusher.checked){
+          adonCost=40;
+          mealCost += adonCost;
+          adonName +=optKrusher.value +"<br>";
+       }
+
+        document.getElementById("lblMeal").innerHTML=mealName;
+        document.getElementById("lblAdon").innerHTML=adonName;
+        document.getElementById("lblTotal").innerHTML="&#8377;" + mealCost;
+      }
+    </script>
+</head>
+<body class="container-fluid">
+    <header>
+        <img src="../public/images/kfcbanner1.webp" class="w-100 d-flex" height="260px">
+    </header>
+    <section>
+        <div class="accordion" id="kfc">
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                 <button class="btn btn-danger w-100 mt-2" data-bs-target="#customer" data-bs-toggle="collapse">
+                    Customer Info
+                 </button>
+                </div>
+                <div class="collapse  accordion-collapse" id="customer" data-bs-parent="#kfc">
+                    <div class="accordion-body">
+                   <dl>
+                    <dt>Customer Name</dt>
+                    <dd>
+                        <input type="text" id="txtName" class="form-control">
+                    </dd>
+                    <dt>Mobile Number</dt>
+                    <dd>
+                        <input type="text" id="txtMobile" class="form-control">
+                    </dd>
+                   </dl>
+                     
+                    
+                    </div>
+                </div>
+                </div>
+
+            <div class="accordion-item">
+            <div class="accordion-header">
+             <button class="btn btn-danger w-100 mt-2" data-bs-target="#meal" data-bs-toggle="collapse">
+                Select Your Meal
+             </button>
+            </div>
+            <div class="collapse  accordion-collapse" id="meal" data-bs-parent="#kfc">
+                <div class="accordion-body">
+                <div class="row">
+                 <div class="col text-center">
+                 <div class="card" style="width: 250px;">
+                    <img src="../public/images/burger.jpeg" class="card-img-top" width="150">
+                 <div class="card-header">
+                 <h3>OMG Burger</h3>
+                 </div>
+                 <div class="card-footer">
+                    <input class="form-check-input" name="meal" id="optBurger" value="opt Burger" type="radio"> &#8377;120/-
+                 </div>
+                 </div>
+                 </div>
+                 <div class="col">
+                    <div class="card" style="width: 250px;">
+                        <img src="../public/images/omg roller.jpg" class="card-img-top" width="150">
+                     <div class="card-header">
+                     <h3>OMG Roller</h3>
+                     </div>
+                     <div class="card-footer">
+                        <input class="form-check-input" id="optRoller" value="opt Roller" name="meal" type="radio"> &#8377;100/-
+                     </div>
+                 </div>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Item-2 -->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                 <button class="btn btn-danger w-100 mt-2" data-bs-target="#adon" data-bs-toggle="collapse">
+                    Select Ad-ON
+                 </button>
+                </div>
+                <div class="collapse  accordion-collapse" id="adon" data-bs-parent="#kfc">
+                    <div class="accordion-body">
+                    <div class="row">
+                     <div class="col text-center">
+                     <div class="card" style="width: 250px;">
+                        <img src="../public/images/wings.jpg" class="card-img-top" width="150">
+                     <div class="card-header">
+                     <h3>Hot Wings</h3>
+                     </div>
+                     <div class="card-footer">
+                        <input class="form-check-input"  id="optWings" value="Hot Wings" type="checkbox"> &#8377;70/-
+                     </div>
+                     </div>
+                     </div>
+                     <div class="col">
+                        <div class="card" style="width: 250px;">
+                            <img src="../public/images/krusher.jpg" class="card-img-top" width="150">
+                         <div class="card-header">
+                         <h3>Krusher Brownie</h3>
+                         </div>
+                         <div class="card-footer">
+                            <input class="form-check-input" id="optKrusher" value="Krusher Brownie"  type="checkbox"> &#8377;40/-
+                         </div>
+                     </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col mt-2">
+                        <button onclick="OrderClick()" data-bs-target="#summary" data-bs-toggle="modal" class="btn btn-danger w-100">
+                        Place Order
+                        </button>
+                    </div>
+                </div>
+                <div class="modal fade" id="summary">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Your bill summary</h3>
+                                <button class=" btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <dl>
+                                    <dt>Customer Name</dt>
+                                    <dd id="lblName"></dd>
+                                    <dt>Mobile</dt>
+                                    <dd id="lblMobile"></dd>
+                                    <dt>Meal</dt>
+                                    <dd id="lblMeal"></dd>
+                                    <dt>Ad-On</dt>
+                                    <dd id="lblAdon"></dd>
+                                    <dt>Total Amount</dt>
+                                    <dt id="lblTotal"></dt>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+    </section>
+    
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
